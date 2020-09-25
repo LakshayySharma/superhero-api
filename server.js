@@ -14,4 +14,4 @@ app.use('/api/superhero', superhero);
 
 app.listen(3000, (req, res)=>{
     console.log(`listening on port 3000`);
-})
+});

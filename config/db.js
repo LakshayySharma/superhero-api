@@ -7,6 +7,7 @@ const connection = async () =>{
             useUnifiedTopology: true,
             useCreateIndex: true,
             useNewUrlParser: true,
+            useFindAndModify: false
         });
         console.log('Mongo Connected');
     }catch(err){

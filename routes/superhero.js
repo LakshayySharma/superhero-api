@@ -10,9 +10,9 @@ router.get('/',async (req,res)=>{
 })
 
 router.post('/',async (req,res)=>{
-    const {name, powers, description} = req.body
+    const {name, powers, description, image} = req.body
     try{
-        const superhero = new Superhero({name,powers,description});
+        const superhero = new Superhero({name,powers,description,image});
         await superhero.save();
         res.json({superhero});
     }
@@ -22,16 +22,38 @@ router.post('/',async (req,res)=>{
     
 });
 
-router.get('/:id',(req,res)=>{
-    res.send(`Get a super hero`);
+router.get('/:id',async (req,res)=>{
+    try{
+        const superhero = await Superhero.findById(req.params.id);
+        res.json(superhero);    
+    }catch(err){
+        console.error(err);
+    }
+    
 })
 
-router.put('/:id',(req,res)=>{
-    res.send(`Edit a super hero`);
+router.patch('/:id',async (req,res)=>{
+    try{
+        
+        const superhero = await Superhero.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        res.json(superhero);
+        
+
+
+    }catch(err){
+        console.error(err);
+    }
 })
 
-router.delete('/:id',(req,res)=>{
-    res.send(`Delete a super hero`);
+router.delete('/:id',async (req,res)=>{
+    try{
+        const superhero = await Superhero.findById(req.params.id);
+        await superhero.remove();
+        const msg = 'Deleted successfully';
+        res.json(msg);
+    }catch(err){
+        console.error(err);
+    }
 })
 
 module.exports = router;

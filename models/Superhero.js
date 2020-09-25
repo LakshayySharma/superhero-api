@@ -13,6 +13,9 @@ const superheroSchema = mongoose.Schema({
     },
     description: {
         type: String,
+    },
+    image: {
+        type: String,
     }
 });
 

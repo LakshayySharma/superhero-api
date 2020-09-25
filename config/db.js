@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const config = require('config');
+const dbUri = config.get('mongoUri');
  
 const connection = async () =>{
     try {
-        await mongoose.connect("mongodb://127.0.0.1:27017/superhero",{
+        await mongoose.connect(dbUri,{
             useUnifiedTopology: true,
             useCreateIndex: true,
             useNewUrlParser: true,
